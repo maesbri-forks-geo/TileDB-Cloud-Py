@@ -199,7 +199,7 @@ def register_udf(
 
         source_lines = utils.getsourcelines(func) if include_source_lines else None
 
-        udf_model = rest_api.models.UDFRegistration(
+        udf_model = rest_api.models.UDFInfoUpdate(
             name=name,
             language=rest_api.models.UDFLanguage.PYTHON,
             version="{}.{}.{}".format(
@@ -216,7 +216,7 @@ def register_udf(
         if source_lines is not None:
             udf_model.exec_raw = source_lines
 
-        api_instance.register_udf(namespace=namespace, name=name, udf=udf_model)
+        api_instance.register_udf_info(namespace=namespace, name=name, udf=udf_model)
 
     except GenApiException as exc:
         raise tiledb_cloud_error.check_exc(exc) from None
@@ -304,7 +304,7 @@ def update_udf(
 
         source_lines = utils.getsourcelines(func) if include_source_lines else None
 
-        udf_model = rest_api.models.UDFRegistration(
+        udf_model = rest_api.models.UDFInfoUpdate(
             name=name,
             language=rest_api.models.UDFLanguage.PYTHON,
             version="{}.{}.{}".format(
@@ -396,7 +396,7 @@ def info(name=None):
 
             namespace = config.user.username
 
-        return api_instance.get_udf(namespace=namespace, name=name)
+        return api_instance.get_udf_info(namespace=namespace, name=name)
     except GenApiException as exc:
         raise tiledb_cloud_error.check_exc(exc) from None
 
@@ -411,7 +411,7 @@ def list_registered_udfs(namespace=None, search=None):
     try:
         api_instance = client.client.udf_api
 
-        return api_instance.get_ud_fs(namespace=namespace, search=search)
+        return api_instance.get_udf_info_list(namespace=namespace, search=search)
     except GenApiException as exc:
         raise tiledb_cloud_error.check_exc(exc) from None
 
@@ -441,7 +441,7 @@ def share(name=None, namespace=None):
     try:
         api_instance = client.client.udf_api
 
-        return api_instance.share_udf(
+        return api_instance.share_udf_info(
             udf_namespace,
             udf_name,
             udf_sharing=rest_api.models.UDFSharing(
@@ -477,7 +477,7 @@ def unshare(name=None, namespace=None):
     try:
         api_instance = client.client.udf_api
 
-        return api_instance.share_udf(
+        return api_instance.share_udf_info(
             udf_namespace,
             udf_name,
             udf_sharing=rest_api.models.UDFSharing(namespace=namespace),

@@ -49,16 +49,24 @@ class GenericUDFTest(unittest.TestCase):
 
 class RegisteredUDFTest(unittest.TestCase):
     def test_register_generic_udf(self):
+        print("running register_generic test")
+
         def test_register_me(arg, kwarg1=None):
             if kwarg1:
                 return kwarg1
             else:
                 return arg
 
-        udf.register_generic_udf(test_register_udf, "registered_generic_udf")
+        try:
+            print("register")
+            udf.register_generic_udf(test_register_udf, "registered_generic_udf")
 
-        res = udf.exec("test arg", func="unittest/registered_generic_udf")
-        self.assertEqual(res, "test arg")
+            print("exec1")
+            res = udf.exec("test arg", func="unittest/registered_generic_udf")
+            self.assertEqual(res, "test arg")
 
-        res = udf.exec(kwarg1="test kwarg1", func="unittest/registered_generic_udf")
-        self.assertEqual(res, "test kwarg1")
+            print("exec2")
+            res = udf.exec(kwarg1="test kwarg1", func="unittest/registered_generic_udf")
+            self.assertEqual(res, "test kwarg1")
+        except Exception as exc:
+            print(exc)

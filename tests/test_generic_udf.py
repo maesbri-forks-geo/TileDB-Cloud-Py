@@ -57,8 +57,8 @@ class RegisteredUDFTest(unittest.TestCase):
 
         udf.register_generic_udf(test_register_udf, "registered_generic_udf")
 
-        res = udf.exec("test arg", func="registered_generic_udf")
+        res = udf.exec("test arg", func="unittest/registered_generic_udf")
         self.assertEqual(res, "test arg")
 
-        res = udf.exec(kwarg1="test kwarg1", func="registered_generic_udf")
+        res = udf.exec(kwarg1="test kwarg1", func="unittest/registered_generic_udf")
         self.assertEqual(res, "test kwarg1")

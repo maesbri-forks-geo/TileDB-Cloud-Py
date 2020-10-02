@@ -100,9 +100,7 @@ def exec_async(
             argument=arguments,
             result_format=rest_api.models.UDFResultType.NATIVE,
             version="{}.{}.{}".format(
-                sys.version_info.major,
-                sys.version_info.minor,
-                sys.version_info.micro,
+                sys.version_info.major, sys.version_info.minor, sys.version_info.micro,
             ),
             image_name=image_name,
             task_name=task_name,
@@ -166,12 +164,7 @@ def exec(
 
 
 def register_udf(
-    func,
-    name,
-    namespace=None,
-    image_name=None,
-    type=None,
-    include_source_lines=True,
+    func, name, namespace=None, image_name=None, type=None, include_source_lines=True,
 ):
     """
 
@@ -207,9 +200,7 @@ def register_udf(
             name=name,
             language=rest_api.models.UDFLanguage.PYTHON,
             version="{}.{}.{}".format(
-                sys.version_info.major,
-                sys.version_info.minor,
-                sys.version_info.micro,
+                sys.version_info.major, sys.version_info.minor, sys.version_info.micro,
             ),
             image_name=image_name,
             type=type,
@@ -271,12 +262,7 @@ def register_single_array_udf(
 
 
 def update_udf(
-    func,
-    name,
-    namespace=None,
-    image_name=None,
-    type=None,
-    include_source_lines=True,
+    func, name, namespace=None, image_name=None, type=None, include_source_lines=True,
 ):
     """
 
@@ -312,9 +298,7 @@ def update_udf(
             name=name,
             language=rest_api.models.UDFLanguage.PYTHON,
             version="{}.{}.{}".format(
-                sys.version_info.major,
-                sys.version_info.minor,
-                sys.version_info.micro,
+                sys.version_info.major, sys.version_info.minor, sys.version_info.micro,
             ),
             image_name=image_name,
             type=type,
